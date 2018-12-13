@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
-    <!-- 리스트 아이템 커스텀 뷰 둥근 모서리 -->
+    <!-- 리스트 아이템 커스텀 뷰 배경에 사용할 둥근 모서리 레이아웃 -->
     <solid android:color="#fff" />
     <corners
         android:bottomLeftRadius="20dp"
