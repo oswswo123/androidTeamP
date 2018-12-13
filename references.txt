@@ -1,0 +1,11 @@
+﻿안드로이드 스플래시 화면 만들기
+https://lx5475.github.io/2017/07/15/android-splash/
+
+레이아웃 둥근 모서리
+http://wimir-dev.tistory.com/37
+
+리스트액티비티
+http://mainia.tistory.com/1428
+
+프로그레스 바
+https://kairo96.gitbooks.io/android/content/ch3.17.html
