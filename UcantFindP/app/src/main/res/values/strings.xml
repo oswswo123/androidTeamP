@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">UcantFindP</string>
+    <string name="reserve">Reserve</string>
+    <string name="nearParkinglots">Parkinglots near to me</string>
+</resources>
