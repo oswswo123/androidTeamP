@@ -1,6 +1,7 @@
 package io.github.cheesecat47.ucantfindp;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -42,6 +43,7 @@ public class ParkListAdapter extends BaseAdapter {
         //이게 액티비티에서 주차장 한 칸으로 보일 내용.
         ParkListItem parkListItem = new ParkListItem(context, total.get(position));
         //한 칸 아이템 만들어서                   context 그대로, 배열 값 하나 넘깁니다.
+        Log.i("TAG", "ParkListAdatper: make new ParkListItem and return");
         return parkListItem;    //그래서 만든거 리턴.
     }
 }

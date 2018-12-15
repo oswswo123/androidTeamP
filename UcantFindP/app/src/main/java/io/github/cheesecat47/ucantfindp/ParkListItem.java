@@ -1,10 +1,14 @@
 package io.github.cheesecat47.ucantfindp;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /*
     ParkListActivity의 ListView에 보일 한 칸에 관련된 내용.
@@ -17,9 +21,13 @@ public class ParkListItem extends LinearLayout {
     private TextView ParkName;
     private TextView ParkCnt;
     private ProgressBar progressBar;
+    private Button ReserveBtn;
+
+    Context context;
 
     public ParkListItem(Context context, ParkInfo data) {
         super(context);
+        this.context = context;
 
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         //커스텀 뷰를 쓸 땐 인플레이터가 필요합니다.
@@ -29,6 +37,7 @@ public class ParkListItem extends LinearLayout {
         ParkName = (TextView) findViewById(R.id.list_item_textView_pName);
         ParkCnt = (TextView) findViewById(R.id.list_item_textView_pCnt);
         progressBar = (ProgressBar) findViewById(R.id.list_item_ProgressBar);
+        ReserveBtn = (Button) findViewById(R.id.list_item_ReserveBtn);          //버튼 등록은 여기서 하지만 핸들링은 ParkListActivity에서 합니다.
 
         ParkName.setText(data.parkName);
         ParkCnt.setText("주차 가능: " + data.parkCntAll + " / 남은 자리: " + data.parkCntLeft);
