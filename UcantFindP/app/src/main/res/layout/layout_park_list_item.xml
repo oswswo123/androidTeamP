@@ -47,12 +47,14 @@
 
     <!--주차장 확인하는 버튼인데 레이아웃을 따로 설정했더니 여기서 안 보이네요..?-->
     <Button
+        android:id="@+id/list_item_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:background="@drawable/drawable_rectangle_list_button"
         android:backgroundTint="@color/colorOurBlack"
-        android:text="@string/reserve" />
+        android:text="@string/reserve"
+        android:onClick="onClick_ReserveBtn"/>
 
 
 </LinearLayout>
