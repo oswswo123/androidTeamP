@@ -9,5 +9,3 @@ http://mainia.tistory.com/1428
 
 프로그레스 바
 https://kairo96.gitbooks.io/android/content/ch3.17.html
-
-수정한 내용
