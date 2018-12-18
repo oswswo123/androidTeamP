@@ -15,7 +15,7 @@ public class SplashActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         Log.i("TAG", "SplashActivity: start");
-        Intent intent = new Intent(this, ParkListActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         //                                              LogInActivity.class 만들고 그 쪽으로 이동.
         startActivity(intent);
         finish();
