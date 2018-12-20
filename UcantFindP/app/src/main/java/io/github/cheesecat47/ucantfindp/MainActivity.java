@@ -32,9 +32,17 @@ public class MainActivity extends AppCompatActivity {
                 //                Toast.makeText(this, "비밀번호를 확인해주세요.",Toast.LENGTH_SHORT).show();
                 // }
                 // else{
-                Intent logIntent = new Intent(this, ParkListActivity.class);
-                startActivity(logIntent);
-                finish();
+                // 아이디의 주차 여부 검사
+                // if(주차여부 == false){
+                    Intent logIntent = new Intent(this, ParkListActivity.class);
+                    startActivity(logIntent);
+                    finish();
+//                     }
+//                else{
+//                  Intent logIntent = new Intent(this, ParkingLot.class);
+//                    startActivity(logIntent);
+//                    finish();
+//                  }
                 // }
     //        }
                 break;
