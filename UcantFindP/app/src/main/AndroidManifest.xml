@@ -18,9 +18,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".MainActivity" /><!-- 지금은 안 쓰는 액티비티 -->
-        <activity android:name=".ParkListActivity"></activity>
+        <activity android:name=".MainActivity" /> <!-- 지금은 안 쓰는 액티비티 -->
+        <activity android:name=".ParkListActivity" />
+        <activity android:name=".ParkingLot"></activity>
     </application>
 
 </manifest>

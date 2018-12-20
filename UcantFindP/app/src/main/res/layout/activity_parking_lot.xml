@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorOurIvory"
+    android:orientation="vertical"
+    tools:context=".ParkingLot">
+
+    <!-- 상단 바 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorOurBlack">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#10ffffff"
+            android:text="◀" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/nearParkinglots"
+            android:textSize="25sp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/TopText1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:textColor="@color/colorOurBlack"
+        android:textSize="25dp" />
+
+    <!-- 여기서부터 주차 현황 버튼들입니다 -->
+    <!-- 차가 있는 곳은 background에 withseat -->
+    <!-- 차가 없는 곳은 background에 noseat -->
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="20dp"
+        android:background="#fff">
+
+        <!-- 첫번째 줄 버튼 -->
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="60dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/drawable_parkinglot_noseat"
+            android:text="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="60dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="70dp"
+            android:background="@drawable/drawable_parkinglot_noseat"
+            android:text="2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="60dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="110dp"
+            android:background="@drawable/drawable_parkinglot_noseat"
+            android:text="3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="60dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="210dp"
+            android:background="@drawable/drawable_parkinglot_withseat"
+            android:text="4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/button5"
+            android:layout_width="60dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="250dp"
+            android:background="@drawable/drawable_parkinglot_withseat"
+            android:text="5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/button6"
+            android:layout_width="60dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="290dp"
+            android:background="@drawable/drawable_parkinglot_noseat"
+            android:text="6"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/button7"
+            android:layout_width="60dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="390dp"
+            android:background="@drawable/drawable_parkinglot_withseat"
+            android:text="7"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/button8"
+            android:layout_width="60dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="430dp"
+            android:background="@drawable/drawable_parkinglot_noseat"
+            android:text="8"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <!-- 두번째 줄 버튼 -->
+        <Button
+            android:id="@+id/button9"
+            android:layout_width="60dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="95dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/drawable_parkinglot_withseat"
+            android:text="9"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/button10"
+            android:layout_width="60dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="95dp"
+            android:layout_marginTop="70dp"
+            android:background="@drawable/drawable_parkinglot_noseat"
+            android:text="10"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/button11"
+            android:layout_width="60dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="95dp"
+            android:layout_marginTop="110dp"
+            android:background="@drawable/drawable_parkinglot_withseat"
+            android:text="11"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/button12"
+            android:layout_width="60dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="95dp"
+            android:layout_marginTop="210dp"
+            android:background="@drawable/drawable_parkinglot_withseat"
+            android:text="12"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/button13"
+            android:layout_width="60dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="95dp"
+            android:layout_marginTop="250dp"
+            android:background="@drawable/drawable_parkinglot_noseat"
+            android:text="13"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/button14"
+            android:layout_width="60dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="95dp"
+            android:layout_marginTop="290dp"
+            android:background="@drawable/drawable_parkinglot_withseat"
+            android:text="14"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/button15"
+            android:layout_width="60dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="95dp"
+            android:layout_marginTop="390dp"
+            android:background="@drawable/drawable_parkinglot_noseat"
+            android:text="15"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/button16"
+            android:layout_width="60dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="95dp"
+            android:layout_marginTop="430dp"
+            android:background="@drawable/drawable_parkinglot_noseat"
+            android:text="16"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <!-- 세번째 줄 버튼 -->
+        <Button
+            android:id="@+id/button17"
+            android:layout_width="60dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="95dp"
+            android:background="@drawable/drawable_parkinglot_noseat"
+            android:text="17"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/button18"
+            android:layout_width="60dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="70dp"
+            android:layout_marginEnd="95dp"
+            android:background="@drawable/drawable_parkinglot_withseat"
+            android:text="18"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/button19"
+            android:layout_width="60dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="110dp"
+            android:layout_marginEnd="95dp"
+            android:background="@drawable/drawable_parkinglot_noseat"
+            android:text="19"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/button20"
+            android:layout_width="60dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="210dp"
+            android:layout_marginEnd="95dp"
+            android:background="@drawable/drawable_parkinglot_withseat"
+            android:text="20"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/button21"
+            android:layout_width="60dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="250dp"
+            android:layout_marginEnd="95dp"
+            android:background="@drawable/drawable_parkinglot_withseat"
+            android:text="21"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/button22"
+            android:layout_width="60dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="290dp"
+            android:layout_marginEnd="95dp"
+            android:background="@drawable/drawable_parkinglot_withseat"
+            android:text="22"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/button23"
+            android:layout_width="60dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="390dp"
+            android:layout_marginEnd="95dp"
+            android:background="@drawable/drawable_parkinglot_noseat"
+            android:text="23"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/button24"
+            android:layout_width="60dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="430dp"
+            android:layout_marginEnd="95dp"
+            android:background="@drawable/drawable_parkinglot_withseat"
+            android:text="24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <!-- 네번째 줄 버튼 -->
+        <Button
+            android:id="@+id/button25"
+            android:layout_width="60dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/drawable_parkinglot_withseat"
+            android:text="25"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/button26"
+            android:layout_width="60dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="70dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/drawable_parkinglot_noseat"
+            android:text="26"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/button27"
+            android:layout_width="60dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="110dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/drawable_parkinglot_noseat"
+            android:text="27"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/button28"
+            android:layout_width="60dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="210dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/drawable_parkinglot_noseat"
+            android:text="28"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/button29"
+            android:layout_width="60dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="250dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/drawable_parkinglot_withseat"
+            android:text="29"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/button30"
+            android:layout_width="60dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="290dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/drawable_parkinglot_noseat"
+            android:text="30"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/button31"
+            android:layout_width="60dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="390dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/drawable_parkinglot_noseat"
+            android:text="31"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/button32"
+            android:layout_width="60dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="430dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/drawable_parkinglot_withseat"
+            android:text="32"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+
+    </android.support.constraint.ConstraintLayout>
+
+</LinearLayout>
