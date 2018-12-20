@@ -27,6 +27,8 @@ public class ParkingLot extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_parking_lot);
 
+        //loadDB();
+
         // 상단부분 주차가능 주차불가 부분
         TopText = (TextView)findViewById(R.id.TopText1);
         String str = "■ 주차가능  ■ 주차불가  ■ 내차위치";
@@ -42,4 +44,9 @@ public class ParkingLot extends AppCompatActivity {
 
         // 아직 주차버튼 리스너는 없어요... 이걸 어떻게 구현해야 할까요...?
     }
+
+    // public void loadDB() {
+    // 아이디의 주차장 이름 불러오는 쿼리 날리기
+    // 내 아이디 쿼리의 내차위치 불러오기
+    // }
 }
