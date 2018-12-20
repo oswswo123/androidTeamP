@@ -2,6 +2,7 @@ package io.github.cheesecat47.ucantfindp;
 
 import android.app.Activity;
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -50,5 +51,7 @@ public class ParkListActivity extends Activity {
         //ReserveBtn을 눌렀을 때 할 onClickListener
         Toast.makeText(ParkListActivity.this, "onClick_ReserveBtn", Toast.LENGTH_SHORT).show();
         Log.i("TAG", "ParkListActivity: onClick_ReserveBtn");
+        Intent GoParkingLot = new Intent(this, ParkingLot.class);
+        startActivity(GoParkingLot);
     }
 }
