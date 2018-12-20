@@ -10,6 +10,8 @@ import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ForegroundColorSpan;
 import android.widget.TextView;
 
+import static io.github.cheesecat47.ucantfindp.R.color.colorOurPurple;
+
 /*
     주차장의 주차된 현황을 보여주는 액티비티입니다.
     주차장 리스트 액티비티에서 ReserveBtn을 누르면 넘어와져요
@@ -27,13 +29,15 @@ public class ParkingLot extends AppCompatActivity {
 
         // 상단부분 주차가능 주차불가 부분
         TopText = (TextView)findViewById(R.id.TopText1);
-        String str = "■ 주차가능  ■ 주차불가";
+        String str = "■ 주차가능  ■ 주차불가  ■ 내차위치";
         SpannableStringBuilder spb1 = new SpannableStringBuilder(str);
         // SpannableStringBuilder를 이용해서 부분별로 색깔이랑 사이즈를 변경
         spb1.setSpan(new ForegroundColorSpan(Color.parseColor("#FAB406")), 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         spb1.setSpan(new AbsoluteSizeSpan(100), 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         spb1.setSpan(new ForegroundColorSpan(Color.parseColor("#afabab")), 8, 9, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         spb1.setSpan(new AbsoluteSizeSpan(100), 8, 9, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spb1.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.colorOurPurple)), 16, 17, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spb1.setSpan(new AbsoluteSizeSpan(100), 16, 17, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         TopText.append(spb1);
 
         // 아직 주차버튼 리스너는 없어요... 이걸 어떻게 구현해야 할까요...?

@@ -35,11 +35,23 @@ public class ParkListActivity extends Activity {
         setContentView(R.layout.activity_park_list);
         Log.i("TAG", "ParkListActivity: start");
 
+
+
+        //서버에 쿼리 보내서 주차장 리스트를 받아온다
+        //받을 내용은 String 주차장 이름, Int 주차장 총 면 수, Int 남은 면 수.
+
         //테스트용. 나중에 서버 연결하면 서버에서 데이터 받아와서 출력하도록 수정해야됩니다.
+        //서버에서 데이터 받은 만큼 반복문으로 자동 추가하게 변경해야됨.
         total_ParkInfo.add(new ParkInfo("Sin 주차장", 25, 15));
         total_ParkInfo.add(new ParkInfo("Cosin 주차장", 20, 13));
         total_ParkInfo.add(new ParkInfo("Tan 주차장", 40, 27));
         Log.i("TAG", "ParkListActivity: add parkinfo activity");
+
+        //주차장이 없을 경우는... 일단은 없을테니까 패쓰.
+
+        //이 까지 서버랑 연결.
+
+
 
         listView = (ListView)findViewById(R.id.activity_park_list_listView);    //리스트뷰 등록
         parkListAdapter = new ParkListAdapter(this, total_ParkInfo);   //어댑터 등록. Context - this, ParkListActivity에서 쓸거고 배열 넘겨줍니다.
