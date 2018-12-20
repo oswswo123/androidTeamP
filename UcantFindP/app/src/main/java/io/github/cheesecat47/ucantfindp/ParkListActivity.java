@@ -51,7 +51,7 @@ public class ParkListActivity extends Activity {
 
         //이 까지 서버랑 연결.
 
-        
+
 
         listView = (ListView)findViewById(R.id.activity_park_list_listView);    //리스트뷰 등록
         parkListAdapter = new ParkListAdapter(this, total_ParkInfo);   //어댑터 등록. Context - this, ParkListActivity에서 쓸거고 배열 넘겨줍니다.

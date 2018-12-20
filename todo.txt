@@ -1,0 +1,16 @@
+﻿Splash
+-쓰레드 1.23초
+
+Login
+
+
+ParkListActivity
+- 1. 서버에 select 쿼리 던져서 주차장 정보 달라고 하기
+- 2. 서버가 주차장 정보 주는건 여기서 하는건 아님. ( 형식은 주차장 이름, 총 면 수, 남은 면 수) 
+      이거 반복해서 받을지 한 번에 받을지 결정
+- 3. 서버에서 받은거 parse string and make instance then add to arraylist.
+- 4. button 누르면 Intent에 주차장 이름 넣어서 그 주차장으로 이동하도록.
+
+ParkingLot
+
+
