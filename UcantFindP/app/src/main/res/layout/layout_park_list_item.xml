@@ -33,9 +33,10 @@
     <!--왼쪽 색깔이 현재 주차된 칸-->
     <ProgressBar
         android:id="@+id/list_item_ProgressBar"
-        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        style="@android:style/Widget.ProgressBar.Horizontal"
         android:layout_width="match_parent"
-        android:layout_height="15dp" />
+        android:layout_height="15dp"
+        android:progressTint="@color/colorOurYellow" />
 
     <TextView
         android:id="@+id/list_item_textView_pCnt"
@@ -52,9 +53,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:background="@drawable/drawable_rectangle_list_button"
-        android:backgroundTint="@color/colorOurBlack"
-        android:text="@string/reserve"
-        android:onClick="onClick_ReserveBtn"/>
+        android:onClick="onClick_ReserveBtn"
+        android:text="@string/reserve" />
 
 
 </LinearLayout>
