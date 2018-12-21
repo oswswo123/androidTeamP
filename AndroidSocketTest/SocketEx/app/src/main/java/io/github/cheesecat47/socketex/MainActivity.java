@@ -28,15 +28,16 @@ public class MainActivity extends AppCompatActivity {
 
     TextView textView;
     Button button;
-    Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            Log.i("Tag", "handler");
-            Log.i("Tag", msg.toString());
-            textView.setText("from server: " + msg);
-        }
-    };
+    Handler mHandler = null;
+//    Handler mHandler = new Handler() {
+//        @Override
+//        public void handleMessage(Message msg) {
+//            super.handleMessage(msg);
+//            Log.i("Tag", "handler");
+//            Log.i("Tag", msg.toString());
+//            textView.setText("from server: " + msg);
+//        }
+//    };
 
 
     @Override
@@ -72,8 +73,8 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void run() {
             super.run();
-            Looper.prepare();
-            Log.i("Tag", "Looper.prepare");
+            //Looper.prepare();
+            //Log.i("Tag", "Looper.prepare");
 
             Log.i("Tag", "run");
             try {
@@ -99,25 +100,39 @@ public class MainActivity extends AppCompatActivity {
 
                 BufferedWriter sockWriter = new BufferedWriter(new OutputStreamWriter(sock.getOutputStream()));
                 BufferedReader sockReader = new BufferedReader(new InputStreamReader(sock.getInputStream()));
+                Log.i("Tag", sockReader.toString());
 
-                sockWriter.write("string from client to server");
+
+
+
+                //query test
+                String parkName = "parkings";
+
+                sockWriter.write("select * from "+parkName+";");
                 sockWriter.flush();
                 Log.i("Tag", "send string to server");
 
-                String obj = sockReader.readLine();
+                final String obj = sockReader.readLine();
                 Log.i("Tag", "read string from server");
 
                 Log.i("Tag", "MainActivity / from server: " + obj);
 //                textView.setText("from server: "+obj);
-                Message msg = mHandler.obtainMessage();
-                mHandler.sendMessage(msg);
+//                Message msg = mHandler.obtainMessage();
+//                mHandler.sendMessage(msg);
+//                mHandler = new Handler();
+//                mHandler.post(new Runnable() {
+//                    @Override
+//                    public void run() {     // 여기서 ui 작업
+//                      textView.setText("from server: "+obj);
+//                    }
+//                });
 
                 sockReader.close();
                 sockWriter.close();
                 sock.close();
 
-                Looper.loop();
-                Log.i("Tag", "Looper.loop");
+                //Looper.loop();
+                //Log.i("Tag", "Looper.loop");
             } catch (Exception e) {
                 e.printStackTrace();
             }
