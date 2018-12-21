@@ -44,6 +44,9 @@ public class ParkingLot extends AppCompatActivity {
 
         // 아직 주차버튼 리스너는 없어요... 이걸 어떻게 구현해야 할까요...?
         /*
+            DB에서 주차 상태를 받아서 주차공간상의 상태를 바꿔주는 부분입니다.
+            DB를 구현하고 나면 되는지 시험해야 할 부분이에요
+
             if 주차가능 {
                 button.setBackgroundResource(R.drawable.drawable_parkinglot_withseat);
             }
