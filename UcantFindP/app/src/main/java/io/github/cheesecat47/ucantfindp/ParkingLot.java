@@ -53,7 +53,7 @@ public class ParkingLot extends Activity implements Button.OnClickListener {
 
 
         //소켓 테스트
-        SocketTest1 socketTest1 = new SocketTest1();
+        SocketTest1 socketTest1 = new SocketTest1(45454);
         String scteststr = socketTest1.sendToServer("parkinglot", "select * from parkings;");
         Log.d("Tag",""+scteststr);
 
