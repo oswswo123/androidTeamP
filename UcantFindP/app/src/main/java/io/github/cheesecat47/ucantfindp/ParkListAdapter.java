@@ -16,9 +16,9 @@ import java.util.ArrayList;
 
 public class ParkListAdapter extends BaseAdapter {
     Context context;
-    ArrayList<ParkInfo> total;
+    ArrayList<ParkListInfo> total;
 
-    ParkListAdapter(Context context, ArrayList<ParkInfo> total) {   //Constructor
+    ParkListAdapter(Context context, ArrayList<ParkListInfo> total) {   //Constructor
         this.context = context;
         this.total = total;
     }

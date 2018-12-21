@@ -1,4 +1,4 @@
-package io.github.cheesecat47.ucantfindp;
+package io.github.cheesecat47.socketex;
 
 /*
     주차장 정보를 저장하는 객체입니다.
@@ -8,33 +8,25 @@ package io.github.cheesecat47.ucantfindp;
  */
 
 public class ParkInfo {
-    /* 원래 있던 거
+    // 원래 있던 거
     private String parkName;
     private int parkCntAll;
     private int parkCntLeft;
-    */
+
 
     // 새로 만든 거 ex.(1, 'N', None) or (3, 'Y', 'id');
     private int parkNum;
     private String parkTF;
     private String carID;
+    
 
-
-    public ParkInfo(int parkNum, String parkTF, String carID) {
+    public ParkInfo(String parkName, int parkCntAll, int parkCntLeft) {
         //Constructor
-        this.parkNum = parkNum;
-        this.parkTF = parkTF;
-        this.carID = carID;
+        this.parkName = parkName;
+        this.parkCntAll = parkCntAll;
+        this.parkCntLeft = parkCntLeft;
     }
 
-    public int getParkNum() { return parkNum; }
-    public String getParkTF() { return parkTF; }
-    public String getCarID() { return carID; }
-    public void setParkNum(int parkNum) { this.parkNum = parkNum; }
-    public void setParkTF(String parkTF) { this.parkTF = parkTF; }
-    public void setCarID(String carID) { this.carID = carID; }
-
-    /*
     public String getParkName() {
         return parkName;
     }
@@ -58,6 +50,4 @@ public class ParkInfo {
     public void setParkCntLeft(int parkCntLeft) {
         this.parkCntLeft = parkCntLeft;
     }
-    */
-
 }

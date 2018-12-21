@@ -28,7 +28,7 @@ import static io.github.cheesecat47.ucantfindp.R.color.colorOurPurple;
 
 public class ParkingLot extends Activity implements Button.OnClickListener {
     TextView TopText;
-    String memberID = null;
+//    String memberID;
     Button button;
 
     @Override
