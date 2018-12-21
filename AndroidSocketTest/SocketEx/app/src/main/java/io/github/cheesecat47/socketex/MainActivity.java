@@ -16,6 +16,7 @@ import java.io.BufferedWriter;
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -23,6 +24,8 @@ import java.io.OutputStreamWriter;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
+import java.net.SocketException;
+import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -42,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     private String toServer = "select * from parkings where isFull=\"N\" and id = 1;";  //보낼 메세지
     private String fromServer = "";     //받은 메세지
 
-    private String flag="";
+    private String flag = "";
     private ArrayList<ParkInfo> ParkInfoArr;   //받은 메세지 파싱 결과(리턴할거)
 
 
@@ -65,8 +68,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ConnectThread thread = new ConnectThread();
+                thread.setDaemon(true);
                 thread.start();
-                Log.i("Tag", "MainActivity / onClick");
+                Log.i("Tag", "MainActivity - onClick / start thread");
+
+                thread.interrupt();
+                Log.i("Tag", "MainActivity - onClick / thread interrupted");
+
             }
         });
     }
@@ -82,9 +90,14 @@ public class MainActivity extends AppCompatActivity {
         this.flag = flag;
 
 
-        ConnectThread thread = new ConnectThread();
-        thread.start();
-        Log.i("Tag", "MainActivity - sentToServer / start thread");
+//        ConnectThread thread = new ConnectThread();
+//        thread.setDaemon(true);
+//        thread.start();
+//        Log.i("Tag", "MainActivity - sentToServer / start thread");
+//
+//        thread.interrupt();
+//        Log.i("Tag", "MainActivity - sendToServer / thread interrupted");
+
     }
 
 
@@ -105,12 +118,13 @@ public class MainActivity extends AppCompatActivity {
             super.run();
             Log.i("Tag", "MainActivity / run Thread");
 
-
             try {
                 //소켓 생성 & 연결
                 sock = new Socket();
                 socketAddress = new InetSocketAddress(hostname, port);
-                sock.connect(socketAddress, 3000);
+                //sock.setSoTimeout(3000);
+                //sock.setSoLinger(true, 3000);
+                sock.connect(socketAddress);
                 Log.i("Tag", sock.toString());
 
 
@@ -127,18 +141,32 @@ public class MainActivity extends AppCompatActivity {
 
                 //그 다음 서버에서 받는 코드
                 fromServer = sockReader.readLine();
-                Log.i("Tag", "MainActivity / from server: " + fromServer);
+                Log.i("Tag", "MainActivity / from server: " + android.os.Process.myTid() + fromServer);
 
 
                 //다 썼으면 정리합니다.
                 sockReader.close();
                 sockWriter.close();
                 sock.close();
+                Log.i("Tag", "MainActivity / sock.close");
 
-                parsingParkInfo();
+                parsingParkInfo(fromServer);
+                fromServer = "";
+                Log.i("Tag", "MainActivity / fromServer(garbage): " + android.os.Process.myTid() + fromServer);
 
+                Thread.sleep(1000);
+            } catch (SocketTimeoutException e) {
+                e.printStackTrace();
+            } catch (SocketException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
             } catch (Exception e) {
                 e.printStackTrace();
+            } finally {
+                Log.i("Tag", "MainActivity - finally / Thread end");
             }
 
             Log.i("Tag", "MainActivity / end try-catch");
@@ -146,17 +174,13 @@ public class MainActivity extends AppCompatActivity {
     }//end thread
 
 
-
-
     //**********************************************************************************************
     //
     //fromServer에서 파싱해서 parsedList에 저장하고 이 배열을 반환합니다.
     //
     //**********************************************************************************************
-    public ArrayList<ParkInfo> parsingParkInfo(){
-        Log.i("Tag", "MainActivity / parsingString");
+    public ArrayList<ParkInfo> parsingParkInfo(String fromServer) {
         String tempString = fromServer; //혹시 모르니깐 복사해서 사용
-
         Log.i("Tag", "MainActivity - parsingString / " + tempString);
 //(1, 'N', None)(2, 'Y', None)(3, 'Y', None)(4, 'Y', None)(5, 'N', None)(6, 'Y', None)
 

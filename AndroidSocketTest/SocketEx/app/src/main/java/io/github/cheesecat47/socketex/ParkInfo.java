@@ -18,13 +18,13 @@ public class ParkInfo {
     private int parkNum;
     private String parkTF;
     private String carID;
-    
 
-    public ParkInfo(String parkName, int parkCntAll, int parkCntLeft) {
+
+    public ParkInfo(int parkNum, String parkTF, String carID) {
         //Constructor
-        this.parkName = parkName;
-        this.parkCntAll = parkCntAll;
-        this.parkCntLeft = parkCntLeft;
+        this.parkNum = parkNum;
+        this.parkTF = parkTF;
+        this.carID = carID;
     }
 
     public String getParkName() {
