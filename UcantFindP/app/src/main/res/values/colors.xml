@@ -11,4 +11,6 @@
     <color name="colorOurBlack">#222a35</color>
     <color name="colorOurIvory">#e8e5dc</color>
     <color name="colorOurPurple">#904085</color>
+    <color name="colorOurDarkMint">#009FB4</color>
+    <color name="colorOurMint">#00D3ED</color>
 </resources>

@@ -2,5 +2,5 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- 스플래시 화면 디자인 -->
     <item
-        android:drawable="@color/colorOurYellow"/>
+        android:drawable="@drawable/mintsplash"/>
 </layer-list>
