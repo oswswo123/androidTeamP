@@ -147,6 +147,7 @@ public class MainActivity extends AppCompatActivity {
     //
     //**********************************************************************************************
     public ArrayList<String> parsingString(){
+        Log.i("Tag", "MainActivity / parsingString");
         String tempString = fromServer; //혹시 모르니깐 복사해서 사용
 
 
