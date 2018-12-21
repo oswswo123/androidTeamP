@@ -34,11 +34,11 @@ public class ParkingLot extends AppCompatActivity {
         String str = "■ 주차가능  ■ 주차불가  ■ 내차위치";
         SpannableStringBuilder spb1 = new SpannableStringBuilder(str);
         // SpannableStringBuilder를 이용해서 부분별로 색깔이랑 사이즈를 변경
-        spb1.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.colorOurYellow)), 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spb1.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.colorOurDarkMint)), 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         spb1.setSpan(new AbsoluteSizeSpan(80), 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         spb1.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.colorOurGrey)), 8, 9, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         spb1.setSpan(new AbsoluteSizeSpan(80), 8, 9, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        spb1.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.colorOurPurple)), 16, 17, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spb1.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.colorOurMint)), 16, 17, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         spb1.setSpan(new AbsoluteSizeSpan(80), 16, 17, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         TopText.append(spb1);
 

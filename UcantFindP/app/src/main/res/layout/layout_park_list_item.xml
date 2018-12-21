@@ -33,10 +33,9 @@
     <!--왼쪽 색깔이 현재 주차된 칸-->
     <ProgressBar
         android:id="@+id/list_item_ProgressBar"
-        style="@android:style/Widget.ProgressBar.Horizontal"
+        style="@android:style/Widget.Holo.ProgressBar.Horizontal"
         android:layout_width="match_parent"
-        android:layout_height="15dp"
-        android:progressTint="@color/colorOurYellow" />
+        android:layout_height="15dp"/>
 
     <TextView
         android:id="@+id/list_item_textView_pCnt"

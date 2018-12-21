@@ -3,13 +3,18 @@ package io.github.cheesecat47.ucantfindp;
 import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuff.Mode;
 import android.os.Handler;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -42,6 +47,7 @@ public class ParkListActivity extends Activity {
 
         //테스트용. 나중에 서버 연결하면 서버에서 데이터 받아와서 출력하도록 수정해야됩니다.
         //서버에서 데이터 받은 만큼 반복문으로 자동 추가하게 변경해야됨.
+
         total_ParkInfo.add(new ParkInfo("Sin 주차장", 25, 15));
         total_ParkInfo.add(new ParkInfo("Cosin 주차장", 20, 13));
         total_ParkInfo.add(new ParkInfo("Tan 주차장", 40, 27));
