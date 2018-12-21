@@ -22,12 +22,11 @@ import static io.github.cheesecat47.ucantfindp.R.color.colorOurPurple;
 /*
     주차장의 주차된 현황을 보여주는 액티비티입니다.
     주차장 리스트 액티비티에서 ReserveBtn을 누르면 넘어와져요
-
-    TopText - 상단에 주차가능 주차불가 부분이에요
  */
 
 public class ParkingLot extends Activity implements Button.OnClickListener {
     TextView TopText;
+    Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,20 +50,22 @@ public class ParkingLot extends Activity implements Button.OnClickListener {
 
         /*
             DB에서 주차 상태를 받아서 주차공간상의 상태를 바꿔주는 부분입니다.
-            DB를 구현하고 나면 되는지 시험해야 할 부분이에요
+            DB가 완성되면 서버와 통신해서 받아야 할 부분이에요.
 
-            if 주차가능 {
+        for (int i = 1; i < 7; i++) {
+            int DbBtnId = getResources().getIdentifier("button" + i, "id", getPackageName());
+            button = (Button)findViewById(DbBtnId);
+
+            if (주차가능) {
                 button.setBackgroundResource(R.drawable.drawable_parkinglot_withseat);
-            }
-            else if 주차불가 {
+            } else if (주차불가(차가 있거나 남이 예약)) {
                 button.setBackgroundResource(R.drawable.drawable_parkinglot_noseat);
-                혹은
-                button.setBackgroundDrawable(ContextCompat.getDrawable(Context, R.drawable.Drawable파일));
             }
-            else if 내차일때 {
+            if (내차일때) {
                 button.setBackgroundResource(R.drawable.drawable_parkinglot_myseat);
             }
-         */
+        }
+        */
     }
 
     @Override
@@ -103,6 +104,17 @@ public class ParkingLot extends Activity implements Button.OnClickListener {
                                         Toast.makeText(ParkingLot.this, "이미 예약한 자리가 있습니다.", Toast.LENGTH_SHORT).show();
                                         dialog.dismiss();
                                     } else { // 예약한 칸이 없다면 예약
+                                        // 예약했다는 정보를 DB로 발송부분 추가 필요
+                                        /*
+                                                                추가구현 필요!!!!
+                                                                추가구현 필요!!!!
+                                                                추가구현 필요!!!!
+
+                                        SendToServer("UPDATE 테이블 SET 내차위치 = 몇번 , 예약 = Y WHERE 나의아이디;");
+                                        혹은
+                                        ContentValues values = new ContentValues();
+                                        SendToServer("테이블",values,"컬럼명 = '변경내용'", 조건?);
+                                         */
                                         Click_Button.setBackgroundResource(R.drawable.drawable_parkinglot_myseat);
                                         Toast.makeText(ParkingLot.this, "예약되었습니다.", Toast.LENGTH_SHORT).show();
                                     }
