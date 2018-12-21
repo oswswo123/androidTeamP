@@ -24,6 +24,11 @@ public class SocketTest1 extends Activity {
 
     private String flag = "";
 
+
+    public SocketTest1(int port) {
+        this.port = port;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +55,18 @@ public class SocketTest1 extends Activity {
 
         ClientThread thread = new ClientThread();
         thread.start();
+
+        try {
+            thread.join();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return getFromServer();
+    }
+
+
+    public String getFromServer() {
 
         return fromServer;
     }
