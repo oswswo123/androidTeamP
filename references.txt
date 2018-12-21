@@ -13,3 +13,6 @@ http://blog.naver.com/PostView.nhn?blogId=ksg7514&logNo=220823189996&categoryNo=
 
 
 select * from parkings
+
+소켓 통신 참조했습니다.
+http://one-delay.tistory.com/30

@@ -28,7 +28,7 @@ import java.net.SocketException;
 import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements Runnable {
 
 
     //송수신에 필요한 것
@@ -53,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView textView;
     private Button button;
 
+    Thread thread = new Thread(this);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,17 +69,76 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ConnectThread thread = new ConnectThread();
-                thread.setDaemon(true);
+//                Thread thread = new Thread();
+//                thread.setDaemon(true);
+                //thread.start();
                 thread.start();
                 Log.i("Tag", "MainActivity - onClick / start thread");
 
+                try {
+                    Thread.sleep(3000);
+                    Log.i("Tag", "여기1");
+                } catch (InterruptedException e) {
+                    Log.i("Tag", "여기");
+                    e.printStackTrace();
+                }
+
                 thread.interrupt();
                 Log.i("Tag", "MainActivity - onClick / thread interrupted");
-
             }
         });
     }
+
+    @Override
+    public void run() {
+        Log.i("Tag", "MainActivity / run Thread");
+
+        try {
+            //소켓 생성 & 연결
+            sock = new Socket();
+            socketAddress = new InetSocketAddress(hostname, port);
+            //sock.setSoTimeout(3000);
+            //sock.setSoLinger(true, 3000);
+            sock.connect(socketAddress);
+            Log.i("Tag", sock.toString());
+
+
+            //소켓에서 쓸 BufferedReader, BufferedWriter
+            sockWriter = new BufferedWriter(new OutputStreamWriter(sock.getOutputStream()));
+            sockReader = new BufferedReader(new InputStreamReader(sock.getInputStream()));
+            Log.i("Tag", sockReader.toString());
+
+
+            sockWriter.write(toServer); //버퍼에 문자열 복사한 후
+            sockWriter.flush();         //전송(버퍼 비우고 안에 있는거 다 보냄)
+            Log.i("Tag", "MainActivity / send to server" + toServer);
+
+
+            //그 다음 서버에서 받는 코드
+            fromServer = sockReader.readLine();
+            Log.i("Tag", "MainActivity / from server: " + android.os.Process.myTid() + fromServer);
+
+
+            //다 썼으면 정리합니다.
+            sockReader.close();
+            sockWriter.close();
+            sock.close();
+            Log.i("Tag", "MainActivity / sock.close");
+
+            parsingParkInfo(fromServer);
+            fromServer = "";
+            Log.i("Tag", "MainActivity / fromServer(garbage): " + android.os.Process.myTid() + fromServer);
+
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            Log.i("Tag", "저기");
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Log.i("Tag", "MainActivity / end try-catch");
+    }//end run
 
 
     //**********************************************************************************************
@@ -90,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
         this.flag = flag;
 
 
-//        ConnectThread thread = new ConnectThread();
+//        Thread thread = new Thread();
 //        thread.setDaemon(true);
 //        thread.start();
 //        Log.i("Tag", "MainActivity - sentToServer / start thread");
@@ -106,72 +167,62 @@ public class MainActivity extends AppCompatActivity {
     //쿼리문을 받아와서 toServer에 저장하고 TCP 통신 스레드 시작합니다.
     //
     //**********************************************************************************************
-    class ConnectThread extends Thread {
-
-        public ConnectThread() {
-            Log.i("Tag", "MainActivity / Thread Constructor");
-        }
-
-
-        @Override
-        public void run() {
-            super.run();
-            Log.i("Tag", "MainActivity / run Thread");
-
-            try {
-                //소켓 생성 & 연결
-                sock = new Socket();
-                socketAddress = new InetSocketAddress(hostname, port);
-                //sock.setSoTimeout(3000);
-                //sock.setSoLinger(true, 3000);
-                sock.connect(socketAddress);
-                Log.i("Tag", sock.toString());
-
-
-                //소켓에서 쓸 BufferedReader, BufferedWriter
-                sockWriter = new BufferedWriter(new OutputStreamWriter(sock.getOutputStream()));
-                sockReader = new BufferedReader(new InputStreamReader(sock.getInputStream()));
-                Log.i("Tag", sockReader.toString());
-
-
-                sockWriter.write(toServer); //버퍼에 문자열 복사한 후
-                sockWriter.flush();         //전송(버퍼 비우고 안에 있는거 다 보냄)
-                Log.i("Tag", "MainActivity / send to server" + toServer);
-
-
-                //그 다음 서버에서 받는 코드
-                fromServer = sockReader.readLine();
-                Log.i("Tag", "MainActivity / from server: " + android.os.Process.myTid() + fromServer);
-
-
-                //다 썼으면 정리합니다.
-                sockReader.close();
-                sockWriter.close();
-                sock.close();
-                Log.i("Tag", "MainActivity / sock.close");
-
-                parsingParkInfo(fromServer);
-                fromServer = "";
-                Log.i("Tag", "MainActivity / fromServer(garbage): " + android.os.Process.myTid() + fromServer);
-
-                Thread.sleep(1000);
-            } catch (SocketTimeoutException e) {
-                e.printStackTrace();
-            } catch (SocketException e) {
-                e.printStackTrace();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                Log.i("Tag", "MainActivity - finally / Thread end");
-            }
-
-            Log.i("Tag", "MainActivity / end try-catch");
-        }//end run
-    }//end thread
+//    class Thread implements Runnable {
+//
+//        public Thread() {
+//            Log.i("Tag", "MainActivity / Thread Constructor");
+//        }
+//
+//
+//        @Override
+//        public void run() {
+//            Log.i("Tag", "MainActivity / run Thread");
+//
+//            try {
+//                //소켓 생성 & 연결
+//                sock = new Socket();
+//                socketAddress = new InetSocketAddress(hostname, port);
+//                //sock.setSoTimeout(3000);
+//                //sock.setSoLinger(true, 3000);
+//                sock.connect(socketAddress);
+//                Log.i("Tag", sock.toString());
+//
+//
+//                //소켓에서 쓸 BufferedReader, BufferedWriter
+//                sockWriter = new BufferedWriter(new OutputStreamWriter(sock.getOutputStream()));
+//                sockReader = new BufferedReader(new InputStreamReader(sock.getInputStream()));
+//                Log.i("Tag", sockReader.toString());
+//
+//
+//                sockWriter.write(toServer); //버퍼에 문자열 복사한 후
+//                sockWriter.flush();         //전송(버퍼 비우고 안에 있는거 다 보냄)
+//                Log.i("Tag", "MainActivity / send to server" + toServer);
+//
+//
+//                //그 다음 서버에서 받는 코드
+//                fromServer = sockReader.readLine();
+//                Log.i("Tag", "MainActivity / from server: " + android.os.Process.myTid() + fromServer);
+//
+//
+//                //다 썼으면 정리합니다.
+//                sockReader.close();
+//                sockWriter.close();
+//                sock.close();
+//                Log.i("Tag", "MainActivity / sock.close");
+//
+//                parsingParkInfo(fromServer);
+//                fromServer = "";
+//                Log.i("Tag", "MainActivity / fromServer(garbage): " + android.os.Process.myTid() + fromServer);
+//
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            } finally {
+//                Log.i("Tag", "MainActivity - finally / Thread end");
+//            }
+//
+//            Log.i("Tag", "MainActivity / end try-catch");
+//        }//end run
+//    }//end thread
 
 
     //**********************************************************************************************
