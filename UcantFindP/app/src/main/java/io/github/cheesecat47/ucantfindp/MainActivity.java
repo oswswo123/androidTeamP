@@ -22,28 +22,31 @@ public class MainActivity extends AppCompatActivity {
     public void onClick_Enter(View view) {
         switch (view.getId()) {
             case R.id.login: // 로그인 버튼
-                // 계정 db 에 등록된 아이디 불러오는 쿼리 날리기
-                // if(아이디가 없을 경우){
-//                   Toast.makeText(this, "등록된 아이디가 없습니다.",Toast.LENGTH_SHORT).show();
+                EditText loginID = (EditText)findViewById(R.id.loginID);
+                EditText loginPW = (EditText)findViewById(R.id.loginPW);
+
+//                MemberInfo 객체 생성
+//                sendToServer 메소드에서는 loginID, loginPW와 일치하는 memberInfo 테이블의 memberID,memberPW의 모든 정보를 리턴해서 MemberInfo 객체로 반환(일치 정보가 없으면 null 반환)
+//                MemberInfo info = new MemberInfo();
+//                info = sendToServer("memberInfo", "SELECT memberPW FROM memberInfo WHERE memberID=\'" + loginID + "\' AND memberPW=\'" + loginPW + "\';");
+
+//                if(info == null){
+//                   Toast.makeText(this, "아이디 또는 비밀번호를 확인해주세요.",Toast.LENGTH_SHORT).show();
 //                  }
                 // else{
-                // 아이디의 비밀번호와 입력 비밀번호 일치여부 검사
-                // if(비밀번호가 일치하지 않을 경우){
-                //                Toast.makeText(this, "비밀번호를 확인해주세요.",Toast.LENGTH_SHORT).show();
-                // }
-                // else{
                 // 아이디의 주차 여부 검사
-                // if(주차여부 == false){
+                // if(info.isParkTF() == false){  // 주차 여부 == false이면 주차장 리스트 화면으로 이동
                     Intent logIntent = new Intent(this, ParkListActivity.class);
                     startActivity(logIntent);
                     finish();
 //                     }
-//                else{
+//                else{ // 주차 여부 == true이면 주차장 좌석 화면으로 이동 , memberID 값을 넘겨줘서 ParkingLot 클래스에서 자신의 차량위치 로드
 //                  Intent logIntent = new Intent(this, ParkingLot.class);
-//                    startActivity(logIntent);
-//                    finish();
+//                  logIntent.putExtra("memberID", loginID);
+//                  startActivity(logIntent);
+//                  finish();
 //                  }
-                // }
+
     //        }
                 break;
             case R.id.join: // 회원가입 버튼
@@ -69,8 +72,11 @@ public class MainActivity extends AppCompatActivity {
                 case DialogInterface.BUTTON_POSITIVE: // 완료
                     EditText ID = (EditText)findViewById(R.id.setId);
                     EditText PW = (EditText)findViewById(R.id.setPw);
-                    EditText pNum = (EditText)findViewById(R.id.setPnum);
+                    EditText CONTACT = (EditText)findViewById(R.id.setContact);
+
                     // 회원정보 테이블에 insert 쿼리 날리기
+//                    sendToServer("memberInfo","INSERT INTO memberInfo (memberID, memberPW) VALUES (\"" + ID + "\", \"" + PW + "\");");
+
                     Toast.makeText(MainActivity.this, "가입되었습니다.", Toast.LENGTH_SHORT).show();
                     break;
                 case DialogInterface.BUTTON_NEGATIVE: // 취소
