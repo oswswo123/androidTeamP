@@ -39,9 +39,11 @@ public class MainActivity extends AppCompatActivity {
     private BufferedReader sockReader;
 
 
-    private String toServer = "select * from parkings;";  //보낼 메세지
+    private String toServer = "select * from parkings where isFull=\"N\" and id = 1;";  //보낼 메세지
     private String fromServer = "";     //받은 메세지
-    private ArrayList<String> parsedList;   //받은 메세지 파싱 결과(리턴할거)
+
+    private String flag="";
+    private ArrayList<ParkInfo> ParkInfoArr;   //받은 메세지 파싱 결과(리턴할거)
 
 
     //UI 여기는 각 액티비티 상황에 따라 수정. 아래에서 UI 관련 코드 역시 수정.
@@ -75,8 +77,11 @@ public class MainActivity extends AppCompatActivity {
     //쿼리문을 받아와서 toServer에 저장하고 TCP 통신 스레드 시작합니다.
     //
     //**********************************************************************************************
-    public void sendToServer(String query) {
+    public void sendToServer(String flag, String query) {
         toServer = query;
+        this.flag = flag;
+
+
         ConnectThread thread = new ConnectThread();
         thread.start();
         Log.i("Tag", "MainActivity - sentToServer / start thread");
@@ -129,12 +134,14 @@ public class MainActivity extends AppCompatActivity {
                 sockReader.close();
                 sockWriter.close();
                 sock.close();
+
+                parsingParkInfo();
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
-
-            parsingString();
+            Log.i("Tag", "MainActivity / end try-catch");
         }//end run
     }//end thread
 
@@ -146,12 +153,13 @@ public class MainActivity extends AppCompatActivity {
     //fromServer에서 파싱해서 parsedList에 저장하고 이 배열을 반환합니다.
     //
     //**********************************************************************************************
-    public ArrayList<String> parsingString(){
+    public ArrayList<ParkInfo> parsingParkInfo(){
         Log.i("Tag", "MainActivity / parsingString");
         String tempString = fromServer; //혹시 모르니깐 복사해서 사용
 
+        Log.i("Tag", "MainActivity - parsingString / " + tempString);
+//(1, 'N', None)(2, 'Y', None)(3, 'Y', None)(4, 'Y', None)(5, 'N', None)(6, 'Y', None)
 
-
-        return parsedList;
+        return null;
     }
 }//end activity
