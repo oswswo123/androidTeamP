@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String addr = "155.230.16.120";
+                String addr = "210.123.39.66";
                 //String addr = "192.168.0.6";
 
                 ConnectThread thread = new ConnectThread(addr);
