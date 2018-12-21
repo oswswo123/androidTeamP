@@ -47,8 +47,9 @@
             android:layout_height="60dp"
             android:layout_marginStart="45dp"
             android:layout_marginTop="45dp"
-            android:background="@drawable/drawable_parkinglot_myseat"
+            android:background="@drawable/drawable_parkinglot_withseat"
             android:text="1"
+            android:onClick="onClick"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -60,6 +61,7 @@
             android:layout_marginTop="115dp"
             android:background="@drawable/drawable_parkinglot_noseat"
             android:text="2"
+            android:onClick="onClick"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -71,6 +73,7 @@
             android:layout_marginTop="185dp"
             android:background="@drawable/drawable_parkinglot_noseat"
             android:text="3"
+            android:onClick="onClick"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -82,6 +85,7 @@
             android:layout_marginTop="45dp"
             android:background="@drawable/drawable_parkinglot_withseat"
             android:text="4"
+            android:onClick="onClick"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -93,6 +97,7 @@
             android:layout_marginTop="115dp"
             android:background="@drawable/drawable_parkinglot_withseat"
             android:text="5"
+            android:onClick="onClick"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -104,6 +109,7 @@
             android:layout_marginTop="185dp"
             android:background="@drawable/drawable_parkinglot_noseat"
             android:text="6"
+            android:onClick="onClick"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
