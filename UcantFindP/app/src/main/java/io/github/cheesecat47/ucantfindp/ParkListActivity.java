@@ -31,7 +31,7 @@ import java.util.ArrayList;
 public class ParkListActivity extends Activity {
 
     ListView listView;
-    ArrayList<ParkInfo> total_ParkInfo = new ArrayList<ParkInfo>();
+    ArrayList<ParkListInfo> total_ParkListInfo = new ArrayList<ParkListInfo>();
     ParkListAdapter parkListAdapter;
 
     @Override
@@ -48,9 +48,9 @@ public class ParkListActivity extends Activity {
         //테스트용. 나중에 서버 연결하면 서버에서 데이터 받아와서 출력하도록 수정해야됩니다.
         //서버에서 데이터 받은 만큼 반복문으로 자동 추가하게 변경해야됨.
 
-        total_ParkInfo.add(new ParkInfo("Sin 주차장", 25, 15));
-        total_ParkInfo.add(new ParkInfo("Cosin 주차장", 20, 13));
-        total_ParkInfo.add(new ParkInfo("Tan 주차장", 40, 27));
+        total_ParkListInfo.add(new ParkListInfo("Sin 주차장", 25, 15));
+        total_ParkListInfo.add(new ParkListInfo("Cosin 주차장", 20, 13));
+        total_ParkListInfo.add(new ParkListInfo("Tan 주차장", 40, 27));
         Log.i("TAG", "ParkListActivity: add parkinfo activity");
 
         //주차장이 없을 경우는... 일단은 없을테니까 패쓰.
@@ -60,7 +60,7 @@ public class ParkListActivity extends Activity {
 
 
         listView = (ListView)findViewById(R.id.activity_park_list_listView);    //리스트뷰 등록
-        parkListAdapter = new ParkListAdapter(this, total_ParkInfo);   //어댑터 등록. Context - this, ParkListActivity에서 쓸거고 배열 넘겨줍니다.
+        parkListAdapter = new ParkListAdapter(this, total_ParkListInfo);   //어댑터 등록. Context - this, ParkListActivity에서 쓸거고 배열 넘겨줍니다.
         listView.setAdapter(parkListAdapter);                                   //어댑터 연결
         Log.i("TAG", "ParkListActivity: set listview adapter");
     }

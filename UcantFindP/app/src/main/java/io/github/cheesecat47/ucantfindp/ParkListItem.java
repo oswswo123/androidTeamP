@@ -29,7 +29,7 @@ public class ParkListItem extends LinearLayout {
 
     Context context;
 
-    public ParkListItem(Context context, ParkInfo data) {
+    public ParkListItem(Context context, ParkListInfo data) {
         super(context);
         this.context = context;
 
@@ -43,12 +43,11 @@ public class ParkListItem extends LinearLayout {
         progressBar = (ProgressBar) findViewById(R.id.list_item_ProgressBar);
         ReserveBtn = (Button) findViewById(R.id.list_item_ReserveBtn);          //버튼 등록은 여기서 하지만 핸들링은 ParkListActivity에서 합니다.
 
-        ParkName.setText(data.parkName);
-        ParkCnt.setText("주차 가능: " + data.parkCntAll + " / 남은 자리: " + data.parkCntLeft);
+        ParkName.setText(data.getParkName());
+        ParkCnt.setText("주차 가능: " + data.getParkCntAll() + " / 남은 자리: " + data.getParkCntLeft());
         progressBar.getProgressDrawable().setColorFilter(ContextCompat.getColor(context, R.color.colorOurMint), PorterDuff.Mode.SRC_IN);
-        출처: http://infostore.tistory.com/6 [libraries]
-        progressBar.setMax(data.parkCntAll);                                //전체 자리 수
-        progressBar.setProgress((data.parkCntAll - data.parkCntLeft));      //남은 지금 주차된 자리만큼 바 왼쪽에 색깔로 표시.
+        progressBar.setMax(data.getParkCntAll());                                //전체 자리 수
+        progressBar.setProgress((data.getParkCntAll() - data.getParkCntLeft()));      //남은 지금 주차된 자리만큼 바 왼쪽에 색깔로 표시.
 
 //        progressBar.getProgressDrawable().setColorFilter(Color.parseColor("#009FB4"), android.graphics.PorterDuff.Mode.SRC_IN);
 //        progressBar.setProgressTintList(ColorStateList.valueOf(Color.parseColor("#009FB4")));
