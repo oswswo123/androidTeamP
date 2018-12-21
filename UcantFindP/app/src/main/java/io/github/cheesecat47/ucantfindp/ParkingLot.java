@@ -12,6 +12,7 @@ import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -50,6 +51,11 @@ public class ParkingLot extends Activity implements Button.OnClickListener {
         spb1.setSpan(new AbsoluteSizeSpan(80), 16, 17, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         TopText.append(spb1);
 
+
+        //소켓 테스트
+        SocketTest1 socketTest1 = new SocketTest1(45454);
+        String scteststr = socketTest1.sendToServer("parkinglot", "select * from parkings;");
+        Log.d("Tag",""+scteststr);
 
 //        MainActivity로부터 memberID값 받아오기
 //        Intent logIntent = getIntent();
