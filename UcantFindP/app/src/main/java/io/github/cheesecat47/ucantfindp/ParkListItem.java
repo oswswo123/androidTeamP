@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,6 +45,8 @@ public class ParkListItem extends LinearLayout {
 
         ParkName.setText(data.parkName);
         ParkCnt.setText("주차 가능: " + data.parkCntAll + " / 남은 자리: " + data.parkCntLeft);
+        progressBar.getProgressDrawable().setColorFilter(ContextCompat.getColor(context, R.color.colorOurMint), PorterDuff.Mode.SRC_IN);
+        출처: http://infostore.tistory.com/6 [libraries]
         progressBar.setMax(data.parkCntAll);                                //전체 자리 수
         progressBar.setProgress((data.parkCntAll - data.parkCntLeft));      //남은 지금 주차된 자리만큼 바 왼쪽에 색깔로 표시.
 
