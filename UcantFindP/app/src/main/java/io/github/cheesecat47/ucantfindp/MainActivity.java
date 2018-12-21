@@ -23,14 +23,9 @@ public class MainActivity extends AppCompatActivity {
         switch (view.getId()) {
             case R.id.login: // 로그인 버튼
                 // 계정 db 에 등록된 아이디 불러오는 쿼리 날리기
-                // if(아이디가 없을 경우){
-//                   Toast.makeText(this, "등록된 아이디가 없습니다.",Toast.LENGTH_SHORT).show();
+                // if(아이디가 없을 경우 || 비밀번호가 일치하지 않을 경우 ){
+//                   Toast.makeText(this, "아이디 또는 비밀번호를 확인해주세요.",Toast.LENGTH_SHORT).show();
 //                  }
-                // else{
-                // 아이디의 비밀번호와 입력 비밀번호 일치여부 검사
-                // if(비밀번호가 일치하지 않을 경우){
-                //                Toast.makeText(this, "비밀번호를 확인해주세요.",Toast.LENGTH_SHORT).show();
-                // }
                 // else{
                 // 아이디의 주차 여부 검사
                 // if(주차여부 == false){
@@ -43,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
 //                    startActivity(logIntent);
 //                    finish();
 //                  }
-                // }
+
     //        }
                 break;
             case R.id.join: // 회원가입 버튼
@@ -69,7 +64,12 @@ public class MainActivity extends AppCompatActivity {
                 case DialogInterface.BUTTON_POSITIVE: // 완료
                     EditText ID = (EditText)findViewById(R.id.setId);
                     EditText PW = (EditText)findViewById(R.id.setPw);
-                    EditText pNum = (EditText)findViewById(R.id.setPnum);
+                    EditText CONTACT = (EditText)findViewById(R.id.setContact);
+
+//                    "INSERT INTO memberInfo (memberID, memberPW, memberContact) VALUES (\"" + ID + "\", \"" + PW + "\", \"" + CONTACT + "\");"
+
+
+
                     // 회원정보 테이블에 insert 쿼리 날리기
                     Toast.makeText(MainActivity.this, "가입되었습니다.", Toast.LENGTH_SHORT).show();
                     break;
