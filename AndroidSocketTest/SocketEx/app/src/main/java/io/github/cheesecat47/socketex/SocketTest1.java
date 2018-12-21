@@ -8,6 +8,9 @@ import android.widget.Button;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
@@ -24,6 +27,9 @@ public class SocketTest1 extends Activity {
 
     private String flag = "";
 
+
+    public SocketTest1() {
+    }
 
     public SocketTest1(int port) {
         this.port = port;
@@ -56,11 +62,13 @@ public class SocketTest1 extends Activity {
         ClientThread thread = new ClientThread();
         thread.start();
 
-        try {
-            thread.join();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            Log.i("Tag", "여기");
+//            thread.join();
+//            Log.i("Tag", "저기");
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
 
         return getFromServer();
     }
@@ -84,7 +92,12 @@ public class SocketTest1 extends Activity {
                 sockWriter.write(toServer);
                 sockWriter.flush();
                 Log.d("ClientThread", "서버로 보냄.");
-                fromServer = (String) sockReader.readLine();
+                try {
+                    fromServer = (String) sockReader.readLine();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
                 Log.d("ClientThread", "받은 데이터 : " + fromServer);
             } catch (Exception e) {
                 e.printStackTrace();

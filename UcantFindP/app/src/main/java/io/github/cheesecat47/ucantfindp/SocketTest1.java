@@ -8,6 +8,8 @@ import android.widget.Button;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
@@ -61,6 +63,10 @@ public class SocketTest1 extends Activity {
         return fromServer;
     }
 
+    public void setFromServer(String str) {
+        this.fromServer = str;
+    }
+
     class ClientThread extends Thread {
 
         public void run() {
@@ -69,13 +75,32 @@ public class SocketTest1 extends Activity {
                 Socket socket = new Socket(hostname, port);
 
                 BufferedWriter sockWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-                BufferedReader sockReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+//                BufferedReader sockReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+
 
                 sockWriter.write(toServer);
                 sockWriter.flush();
                 Log.d("ClientThread", "서버로 보냄.");
-                fromServer = (String) sockReader.readLine();
+//                fromServer = (String) sockReader.readLine();
+//                setFromServer((String) sockReader.readLine());
+
+                ByteArrayOutputStream byteArrayOutputStream =
+                        new ByteArrayOutputStream(1024);
+                byte[] buffer = new byte[1024];
+
+                int bytesRead;
+                InputStream inputStream = socket.getInputStream();
+
+                while ((bytesRead = inputStream.read(buffer)) != -1){
+                    byteArrayOutputStream.write(buffer, 0, bytesRead);
+                    fromServer += byteArrayOutputStream.toString("UTF-8");
+                }
+
                 Log.d("ClientThread", "받은 데이터 : " + fromServer);
+
+//                sockReader.close();
+                sockWriter.close();
+                socket.close();
             } catch (Exception e) {
                 e.printStackTrace();
             }
