@@ -43,6 +43,17 @@ public class ParkingLot extends AppCompatActivity {
         TopText.append(spb1);
 
         // 아직 주차버튼 리스너는 없어요... 이걸 어떻게 구현해야 할까요...?
+        /*
+            if 주차가능 {
+                button.setBackgroundResource(R.drawable.drawable_parkinglot_withseat);
+            }
+            else if 주차불가 {
+                button.setBackgroundResource(R.drawable.drawable_parkinglot_noseat);
+            }
+            else if 내차일때 {
+                button.setBackgroundResource(R.drawable.drawable_parkinglot_myseat);
+            }
+         */
     }
 
     // public void loadDB() {
