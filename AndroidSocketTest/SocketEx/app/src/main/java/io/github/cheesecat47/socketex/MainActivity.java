@@ -61,32 +61,35 @@ public class MainActivity extends AppCompatActivity implements Runnable {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        SocketTest1 s = new SocketTest1(45454);
+        String testStr = "";
 
-        textView = (TextView) findViewById(R.id.textView);
+        testStr = s.sendToServer("aa", toServer);
+        Log.i("Tag", "" + testStr);
 
-
-        button = (Button) findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                Thread thread = new Thread();
-//                thread.setDaemon(true);
-                //thread.start();
-                thread.start();
-                Log.i("Tag", "MainActivity - onClick / start thread");
-
-                try {
-                    Thread.sleep(3000);
-                    Log.i("Tag", "여기1");
-                } catch (InterruptedException e) {
-                    Log.i("Tag", "여기");
-                    e.printStackTrace();
-                }
-
-                thread.interrupt();
-                Log.i("Tag", "MainActivity - onClick / thread interrupted");
-            }
-        });
+//        button = (Button) findViewById(R.id.button);
+//        button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+////                Thread thread = new Thread();
+////                thread.setDaemon(true);
+//                //thread.start();
+////                thread.start();
+////                Log.i("Tag", "MainActivity - onClick / start thread");
+////
+////                try {
+////                    Thread.sleep(3000);
+////                    Log.i("Tag", "여기1");
+////                } catch (InterruptedException e) {
+////                    Log.i("Tag", "여기");
+////                    e.printStackTrace();
+////                }
+////
+////                thread.interrupt();
+////                Log.i("Tag", "MainActivity - onClick / thread interrupted");
+//                testStr = s.sendToServer("aa", toServer);
+//            }
+//        });
     }
 
     @Override
