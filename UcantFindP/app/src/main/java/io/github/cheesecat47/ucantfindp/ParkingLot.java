@@ -28,13 +28,14 @@ import static io.github.cheesecat47.ucantfindp.R.color.colorOurPurple;
 
 public class ParkingLot extends Activity implements Button.OnClickListener {
     TextView TopText;
+    String memberID = null;
+    Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_parking_lot);
 
-        //loadDB();
 
         // 상단부분 주차가능 주차불가 부분
         TopText = (TextView) findViewById(R.id.TopText1);
@@ -49,20 +50,37 @@ public class ParkingLot extends Activity implements Button.OnClickListener {
         spb1.setSpan(new AbsoluteSizeSpan(80), 16, 17, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         TopText.append(spb1);
 
+
+//        MainActivity로부터 memberID값 받아오기
+//        Intent logIntent = getIntent();
+//        mamberID = logIntent.getExtras().getString("memberID");
+
+//        주차장 정보 불러오는 쿼리 날리기
+//        ParkInfo[] parkinfo = sendToServer("parkings", "SELECT * FROM parkings");
+
+
         /*
             DB에서 주차 상태를 받아서 주차공간상의 상태를 바꿔주는 부분입니다.
             DB를 구현하고 나면 되는지 시험해야 할 부분이에요
 
-            if 주차가능 {
-                button.setBackgroundResource(R.drawable.drawable_parkinglot_withseat);
-            }
-            else if 주차불가 {
-                button.setBackgroundResource(R.drawable.drawable_parkinglot_noseat);
-                혹은
-                button.setBackgroundDrawable(ContextCompat.getDrawable(Context, R.drawable.Drawable파일));
-            }
-            else if 내차일때 {
-                button.setBackgroundResource(R.drawable.drawable_parkinglot_myseat);
+
+            for(int i=0; i<6; i++){
+                int DbBtnId = getResources().getIdentifier("button" + i+1, "id", getPackageName());
+                button = (Button)findViewById(DbBtnId);
+
+                if(parkinfo[i].parkTR == "N") { //주차 공간이 비어있는 경우
+                    button.setBackgroundResource(R.drawable.drawable_parkinglot_withseat);
+                }
+                else if(parkinfo[i].parkTR == "Y") { //주차 공간이 차있는 경우
+                    if(parkinfo[i].carID == memberID) { // 주차 공간에 등록된 아이디가 membeID와 일치하는 경우
+                        button.setBackgroundResource(R.drawable.drawable_parkinglot_myseat);
+                    }
+                    else{
+                        button.setBackgroundResource(R.drawable.drawable_parkinglot_noseat);
+                        혹은
+                        button.setBackgroundDrawable(ContextCompat.getDrawable(Context, R.drawable.Drawable파일));
+                    }
+                }
             }
          */
     }
@@ -76,7 +94,6 @@ public class ParkingLot extends Activity implements Button.OnClickListener {
         Drawable.ConstantState Withseat_State = ContextCompat.getDrawable(mContext, R.drawable.drawable_parkinglot_withseat).getConstantState();
         if (View_State.equals(Withseat_State)) { // 빈 공간을 클릭했을 때
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(mContext);
-
             alertDialogBuilder.setTitle("예약");
             alertDialogBuilder
                     .setMessage("예약 하시겠습니까?")
@@ -122,9 +139,4 @@ public class ParkingLot extends Activity implements Button.OnClickListener {
             Toast.makeText(ParkingLot.this, "그 곳은 예약을 할 수 없습니다.", Toast.LENGTH_SHORT).show();
         }
     }
-
-    // public void loadDB() {
-    // 아이디의 주차장 이름 불러오는 쿼리 날리기
-    // 내 아이디 쿼리의 내차위치 불러오기
-    // }
 }
