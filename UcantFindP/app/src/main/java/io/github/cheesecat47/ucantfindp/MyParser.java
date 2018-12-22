@@ -9,7 +9,7 @@ public class MyParser {
     String carID;
 
 
-    public MyParser(Boolean isMember, String inputdata) {
+    public MyParser(boolean isMember, String inputdata) {
         String str = inputdata;
 
         String str1 = str.replace(")", "");
