@@ -9,6 +9,7 @@ import android.widget.Button;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -20,6 +21,9 @@ public class SocketTest1 extends Activity {
     //송수신에 필요한 것
     private String hostname = "210.123.39.66";  //서버 IP주소
     private int port = 45454;
+
+    BufferedWriter sockWriter;
+    BufferedReader sockReader;
 
     private String toServer = "select * from parkings;";  //보낼 메세지
     private String fromServer = "";     //받은 메세지
@@ -86,19 +90,25 @@ public class SocketTest1 extends Activity {
             try {
                 Socket socket = new Socket(hostname, port);
 
-                BufferedWriter sockWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-                BufferedReader sockReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                sockWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
 
                 sockWriter.write(toServer);
                 sockWriter.flush();
-                Log.d("ClientThread", "서버로 보냄.");
-                try {
-                    fromServer = (String) sockReader.readLine();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                Log.d("ClientThread", "서버로 보냄.1");
 
-                Log.d("ClientThread", "받은 데이터 : " + fromServer);
+//                sockReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+//                fromServer = sockReader.readLine();
+
+                InputStreamReader is = new InputStreamReader(socket.getInputStream());
+                fromServer = is;
+
+//                while ((fromServer = sockReader.readLine())!=null){
+//                    Log.d("Tag", "while "+fromServer);
+//                }
+                Log.d("ClientThread", "받은 데이터1 : " + fromServer);
+
+                fromServer = "";
+                socket.close();
             } catch (Exception e) {
                 e.printStackTrace();
             }
