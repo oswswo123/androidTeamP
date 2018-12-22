@@ -1,7 +1,9 @@
 package io.github.cheesecat47.ucantfindp;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -21,13 +23,7 @@ public class SocketTest1 extends Activity {
     private String toServer = "select * from parkings;";  //보낼 메세지
     private String fromServer = "";     //받은 메세지
 
-
     private String flag = "";
-
-
-    public SocketTest1(int port) {
-        this.port = port;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,20 +42,17 @@ public class SocketTest1 extends Activity {
         ClientThread thread = new ClientThread();
         thread.start();
 
-        try {
-            thread.join();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return getFromServer();
-    }
-
-
-    public String getFromServer() {
-
         return fromServer;
     }
+
+    /*
+    @Override
+    protected void onSaveInstanceState(Bundle outState){
+        outState.putString("inputdata", fromServer);
+        super.onSaveInstanceState(outState);
+    }
+    */
+
 
     class ClientThread extends Thread {
 

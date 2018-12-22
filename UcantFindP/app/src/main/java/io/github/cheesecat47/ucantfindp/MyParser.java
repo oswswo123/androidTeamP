@@ -26,4 +26,5 @@ public class MyParser {
         }
     }
 
+    public ArrayList<ParkInfo> getParkInfoArr() { return parkInfoArr;  }
 }

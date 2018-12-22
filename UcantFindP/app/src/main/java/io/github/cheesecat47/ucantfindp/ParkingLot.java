@@ -3,6 +3,7 @@ package io.github.cheesecat47.ucantfindp;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -38,6 +39,8 @@ public class ParkingLot extends Activity implements Button.OnClickListener {
         setContentView(R.layout.activity_parking_lot);
 
 
+
+
         // 상단부분 주차가능 주차불가 부분
         TopText = (TextView) findViewById(R.id.TopText1);
         String str = "■ 주차가능  ■ 주차불가  ■ 내차위치";
@@ -53,10 +56,9 @@ public class ParkingLot extends Activity implements Button.OnClickListener {
 
 
         //소켓 테스트
-        SocketTest1 socketTest1 = new SocketTest1(45454);
+        SocketTest1 socketTest1 = new SocketTest1();
         String scteststr = socketTest1.sendToServer("parkinglot", "select * from parkings;");
         Log.d("Tag",""+scteststr);
-
 //        MainActivity로부터 memberID값 받아오기
 //        Intent logIntent = getIntent();
 //        mamberID = logIntent.getExtras().getString("memberID");
