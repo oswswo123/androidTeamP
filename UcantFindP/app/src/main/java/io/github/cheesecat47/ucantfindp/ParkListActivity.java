@@ -33,12 +33,16 @@ public class ParkListActivity extends Activity {
     ListView listView;
     ArrayList<ParkListInfo> total_ParkListInfo = new ArrayList<ParkListInfo>();
     ParkListAdapter parkListAdapter;
+    String memberID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_park_list);
         Log.i("TAG", "ParkListActivity: start");
+
+        Intent logIntent = getIntent();
+        memberID = logIntent.getExtras().getString("memberID");
 
 
 
@@ -70,6 +74,7 @@ public class ParkListActivity extends Activity {
         Toast.makeText(ParkListActivity.this, "onClick_ReserveBtn", Toast.LENGTH_SHORT).show();
         Log.i("TAG", "ParkListActivity: onClick_ReserveBtn");
         Intent GoParkingLot = new Intent(this, ParkingLot.class);
+        GoParkingLot.putExtra("memberID", memberID);
         startActivity(GoParkingLot);
     }
 }
