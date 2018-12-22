@@ -32,7 +32,7 @@ import static io.github.cheesecat47.ucantfindp.R.color.colorOurPurple;
 
 public class ParkingLot extends Activity implements Button.OnClickListener {
     TextView TopText;
-//    String memberID;
+    String memberID;
     Button button;
     ArrayList<ParkInfo> parkInfoArr;
 
@@ -40,8 +40,6 @@ public class ParkingLot extends Activity implements Button.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_parking_lot);
-
-
 
 
         // 상단부분 주차가능 주차불가 부분
@@ -61,37 +59,35 @@ public class ParkingLot extends Activity implements Button.OnClickListener {
         //소켓 테스트
         SocketTest1 socketTest1 = new SocketTest1(50000);
         String scteststr = socketTest1.sendToServer("parkinglot", "select * from parkings;");
-        Log.d("Tag",""+scteststr);
+        Log.d("Tag", "" + scteststr);
         MyParser ParkParser = new MyParser(false, scteststr);
         parkInfoArr = ParkParser.getParkInfoArr();
 //        MainActivity로부터 memberID값 받아오기
-//        Intent logIntent = getIntent();
-//        mamberID = logIntent.getExtras().getString("memberID");
+        Intent logIntent = getIntent();
+        memberID = logIntent.getExtras().getString("memberID");
 
 
-            for(int i=0; i<6; i++){
-                int j = i + 1;
-                int DbBtnId = getResources().getIdentifier("button" + j, "id", getPackageName());
-                button = (Button)findViewById(DbBtnId);
-                String temp = parkInfoArr.get(i).getParkTF();
-                String temp2 = parkInfoArr.get(i).getCarID();
+        for (int i = 0; i < 6; i++) {
+            int j = i + 1;
+            int DbBtnId = getResources().getIdentifier("button" + j, "id", getPackageName());
+            button = (Button) findViewById(DbBtnId);
+            String temp = parkInfoArr.get(i).getParkTF();
+            String temp2 = parkInfoArr.get(i).getCarID();
 
-                if(parkInfoArr.get(i).getParkTF().equals("N")) { //주차 공간이 비어있는 경우
-                    if(parkInfoArr.get(i).getCarID().equals("None")) { // 주차 공간에 등록된 아이디가 없을 경우
-                        button.setBackgroundResource(R.drawable.drawable_parkinglot_withseat);
-                    }
-                    else{ // 주차 공간에 등록된 아이디가 있을 경우(예약자가 있는 경우)
-                        button.setBackgroundResource(R.drawable.drawable_parkinglot_noseat);
-                    }
+            if (parkInfoArr.get(i).getParkTF().equals("N")) { //주차 공간이 비어있는 경우
+                if (parkInfoArr.get(i).getCarID().equals("None")) { // 주차 공간에 등록된 아이디가 없을 경우
+                    button.setBackgroundResource(R.drawable.drawable_parkinglot_withseat);
+                } else { // 주차 공간에 등록된 아이디가 있을 경우(예약자가 있는 경우)
+                    button.setBackgroundResource(R.drawable.drawable_parkinglot_noseat);
                 }
-                else if(parkInfoArr.get(i).getParkTF().equals("Y")) { //주차 공간이 차있는 경우
-//                    if (parkInfoArr.get(i).getCarID().equals(memberID)) { // 주차 공간에 등록된 아이디가 membeID와 일치하는 경우
-//                        button.setBackgroundResource(R.drawable.drawable_parkinglot_myseat);
-//                    } else {
-                        button.setBackgroundResource(R.drawable.drawable_parkinglot_noseat);
-//                    }
-                }
+            } else if (parkInfoArr.get(i).getParkTF().equals("Y")) { //주차 공간이 차있는 경우
+                button.setBackgroundResource(R.drawable.drawable_parkinglot_noseat);
             }
+
+            if (parkInfoArr.get(i).getCarID().equals(memberID)){
+                button.setBackgroundResource(R.drawable.drawable_parkinglot_myseat);
+            }
+        }
 
 
     }
@@ -131,6 +127,11 @@ public class ParkingLot extends Activity implements Button.OnClickListener {
                                         Toast.makeText(ParkingLot.this, "이미 예약한 자리가 있습니다.", Toast.LENGTH_SHORT).show();
                                         dialog.dismiss();
                                     } else { // 예약한 칸이 없다면 예약
+                                        int currentposition = Integer.parseInt(Click_Button.getText().toString());
+                                        SocketTest1 socketTest2 = new SocketTest1(50000);
+                                        socketTest2.sendToServer("parkinglot", "UPDATE parkings SET name = \"" + memberID + "\" WHERE ID = " + currentposition + ";");
+
+                                        // 이후 색 변경
                                         Click_Button.setBackgroundResource(R.drawable.drawable_parkinglot_myseat);
                                         Toast.makeText(ParkingLot.this, "예약되었습니다.", Toast.LENGTH_SHORT).show();
                                     }

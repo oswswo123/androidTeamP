@@ -8,6 +8,9 @@ public class MyParser {
     String parkTF;
     String carID;
 
+    ArrayList<MemberInfo> memberInfoArr = new ArrayList<MemberInfo>();
+    String memberID;
+    String memberPW;
 
     public MyParser(boolean isMember, String inputdata) {
         String str = inputdata;
@@ -20,9 +23,13 @@ public class MyParser {
         String str6 = str5.replace("]", "");
 
         String[] buffer = str6.split(",");
-
         if(isMember){
-
+            for (int i = 0; i < buffer.length; i += 3) {
+                memberID = buffer[i];
+                memberPW = buffer[i + 1];
+                parkTF = buffer[i + 2];
+                memberInfoArr.add(new MemberInfo(memberID, memberPW, parkTF));
+            }
         }
         else {
             for (int i = 0; i < buffer.length; i += 3) {
@@ -35,4 +42,8 @@ public class MyParser {
     }
 
     public ArrayList<ParkInfo> getParkInfoArr() { return parkInfoArr;  }
+
+    public ArrayList<MemberInfo> getMemberInfoArr() {
+        return memberInfoArr;
+    }
 }
