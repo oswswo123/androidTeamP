@@ -1,27 +1,25 @@
-int cds0 = A0;
-int cds1 = A1;
-int cds2 = A2;
-int len = 3; 
-int cds[3]= {A0,A1,A2};
-int cdsValue[3]={0,0,0};
+int len = 6; 
+int cds[6]= {A0,A1,A2,A3,A4,A5};
+int cdsValue[6]={0,0,0,0,0,0};
 int FULL = 1;
 int EMPTY = 0;
-int parking[3]={0,0,0};
+int parking[6]={0,0,0,0,0,0};
 int i;
 
 void setup() {
   // put your setup code here, to run once:
-  Serial.begin(9600);
+  Serial.begin(9600); //Serial 통신
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
 
   for(i=0;i<len;i++){
-      cdsValue[i]=analogRead(cds[i]);
-      if(cdsValue[i]>200) parking[i]=FULL;
+      cdsValue[i]=analogRead(cds[i]); // Vout read
+      if(cdsValue[i]>250) parking[i]=FULL;
       else parking[i]=EMPTY;
       Serial.print(parking[i]);
+      //Serial.print(cdsValue[i]);
       delayMicroseconds(500);
       Serial.print(" ");
       delayMicroseconds(500);
