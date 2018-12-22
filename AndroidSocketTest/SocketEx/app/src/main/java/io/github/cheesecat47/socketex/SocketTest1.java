@@ -26,18 +26,18 @@ public class SocketTest1 extends Activity {
 
 
     public SocketTest1(int port) {
-        this.port = port;
-    }
+                this.port = port;
+            }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+                @Override
+                protected void onCreate(Bundle savedInstanceState) {
+                    super.onCreate(savedInstanceState);
+                    setContentView(R.layout.activity_main);
 
-        Button button = (Button) findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+                    Button button = (Button) findViewById(R.id.button);
+                    button.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
                 ClientThread thread = new ClientThread();
                 thread.start();
             }

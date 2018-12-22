@@ -23,12 +23,28 @@ public class SocketTest1 extends Activity {
     private String toServer = "select * from parkings;";  //보낼 메세지
     private String fromServer = "";     //받은 메세지
 
+
     private String flag = "";
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+
+    public SocketTest1(int port) {
+        this.port = port;
     }
+
+//    @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_main);
+//
+//        Button button = (Button) findViewById(R.id.button);
+//        button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                ClientThread thread = new ClientThread();
+//                thread.start();
+//            }
+//        });
+//    }
 
     //**********************************************************************************************
     //
@@ -42,17 +58,20 @@ public class SocketTest1 extends Activity {
         ClientThread thread = new ClientThread();
         thread.start();
 
+        try {
+            thread.join();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return getFromServer();
+    }
+
+
+    public String getFromServer() {
+
         return fromServer;
     }
-
-    /*
-    @Override
-    protected void onSaveInstanceState(Bundle outState){
-        outState.putString("inputdata", fromServer);
-        super.onSaveInstanceState(outState);
-    }
-    */
-
 
     class ClientThread extends Thread {
 
@@ -75,5 +94,4 @@ public class SocketTest1 extends Activity {
         }
     }
 }
-
 
