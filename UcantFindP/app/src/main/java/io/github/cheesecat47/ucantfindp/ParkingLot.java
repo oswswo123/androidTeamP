@@ -55,7 +55,6 @@ public class ParkingLot extends Activity implements Button.OnClickListener {
         spb1.setSpan(new AbsoluteSizeSpan(80), 16, 17, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         TopText.append(spb1);
 
-
         //소켓 테스트
         SocketTest1 socketTest1 = new SocketTest1(50000);
         String scteststr = socketTest1.sendToServer("parkinglot", "select * from parkings;");
@@ -78,14 +77,18 @@ public class ParkingLot extends Activity implements Button.OnClickListener {
                 if (parkInfoArr.get(i).getCarID().equals("None")) { // 주차 공간에 등록된 아이디가 없을 경우
                     button.setBackgroundResource(R.drawable.drawable_parkinglot_withseat);
                 } else { // 주차 공간에 등록된 아이디가 있을 경우(예약자가 있는 경우)
-                    button.setBackgroundResource(R.drawable.drawable_parkinglot_noseat);
+                    if (parkInfoArr.get(i).getCarID().equals(memberID)) {
+                        button.setBackgroundResource(R.drawable.drawable_parkinglot_myseat);
+                    } else {
+                        button.setBackgroundResource(R.drawable.drawable_parkinglot_noseat);
+                    }
                 }
             } else if (parkInfoArr.get(i).getParkTF().equals("Y")) { //주차 공간이 차있는 경우
-                button.setBackgroundResource(R.drawable.drawable_parkinglot_noseat);
-            }
-
-            if (parkInfoArr.get(i).getCarID().equals(memberID)){
-                button.setBackgroundResource(R.drawable.drawable_parkinglot_myseat);
+                if (parkInfoArr.get(i).getCarID().equals(memberID)) {
+                    button.setBackgroundResource(R.drawable.drawable_parkinglot_myseat);
+                } else {
+                    button.setBackgroundResource(R.drawable.drawable_parkinglot_noseat);
+                }
             }
         }
 
@@ -130,6 +133,9 @@ public class ParkingLot extends Activity implements Button.OnClickListener {
                                         int currentposition = Integer.parseInt(Click_Button.getText().toString());
                                         SocketTest1 socketTest2 = new SocketTest1(50000);
                                         socketTest2.sendToServer("parkinglot", "UPDATE parkings SET name = \"" + memberID + "\" WHERE ID = " + currentposition + ";");
+
+//                                        SocketTest1 socketTest3 = new SocketTest1(54545);
+//                                        socketTest3.sendToServer("members", "UPDATE members SET parkTF = \"T\" WHERE memberID= "+memberID+";");
 
                                         // 이후 색 변경
                                         Click_Button.setBackgroundResource(R.drawable.drawable_parkinglot_myseat);

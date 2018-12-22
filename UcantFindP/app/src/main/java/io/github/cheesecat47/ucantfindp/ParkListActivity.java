@@ -31,6 +31,7 @@ import java.util.ArrayList;
 public class ParkListActivity extends Activity {
 
     ListView listView;
+    ArrayList<ParkInfo> parkInfoArr;
     ArrayList<ParkListInfo> total_ParkListInfo = new ArrayList<ParkListInfo>();
     ParkListAdapter parkListAdapter;
     String memberID;
@@ -41,32 +42,70 @@ public class ParkListActivity extends Activity {
         setContentView(R.layout.activity_park_list);
         Log.i("TAG", "ParkListActivity: start");
 
-        Intent logIntent = getIntent();
-        memberID = logIntent.getExtras().getString("memberID");
-
-
-
         //서버에 쿼리 보내서 주차장 리스트를 받아온다
-        //받을 내용은 String 주차장 이름, Int 주차장 총 면 수, Int 남은 면 수.
+        SocketTest1 socketTest1 = new SocketTest1(50000);
+        String scteststr = socketTest1.sendToServer("parkinglot", "select * from parkings;");
+        Log.d("Tag", "" + scteststr);
+        MyParser ParkParser = new MyParser(false, scteststr);
+        parkInfoArr = ParkParser.getParkInfoArr();
 
-        //테스트용. 나중에 서버 연결하면 서버에서 데이터 받아와서 출력하도록 수정해야됩니다.
-        //서버에서 데이터 받은 만큼 반복문으로 자동 추가하게 변경해야됨.
+        int MyParkCntAll = parkInfoArr.size();
+        int MyParkCntLeft = 6;
+        for (int i = 0; i < parkInfoArr.size(); i++) {
+            if (parkInfoArr.get(i).getParkTF().equals("Y")) {
+                MyParkCntLeft--;
+            } else if (parkInfoArr.get(i).getCarID().equals("None")) {
+                continue;
+            } else if (parkInfoArr.get(i).getCarID().equals(memberID)) {
+                continue;
+            } else {
+                MyParkCntLeft--;
+            }
+        }
 
-        total_ParkListInfo.add(new ParkListInfo("Sin 주차장", 25, 15));
+        //실제로 사용할 주차장
+        total_ParkListInfo.add(new ParkListInfo("Sin 주차장", MyParkCntAll, MyParkCntLeft));
+
+        //가상 주차장
         total_ParkListInfo.add(new ParkListInfo("Cosin 주차장", 20, 13));
         total_ParkListInfo.add(new ParkListInfo("Tan 주차장", 40, 27));
         Log.i("TAG", "ParkListActivity: add parkinfo activity");
 
-        //주차장이 없을 경우는... 일단은 없을테니까 패쓰.
-
-        //이 까지 서버랑 연결.
-
-
-
-        listView = (ListView)findViewById(R.id.activity_park_list_listView);    //리스트뷰 등록
+        listView = (ListView) findViewById(R.id.activity_park_list_listView);    //리스트뷰 등록
         parkListAdapter = new ParkListAdapter(this, total_ParkListInfo);   //어댑터 등록. Context - this, ParkListActivity에서 쓸거고 배열 넘겨줍니다.
         listView.setAdapter(parkListAdapter);                                   //어댑터 연결
         Log.i("TAG", "ParkListActivity: set listview adapter");
+
+        Intent logIntent = getIntent();
+        memberID = logIntent.getExtras().getString("memberID");
+    }
+
+    @Override
+    protected  void onResume(){
+        super.onResume();
+
+        SocketTest1 socketTest1 = new SocketTest1(50000);
+        String scteststr = socketTest1.sendToServer("parkinglot", "select * from parkings;");
+        Log.d("Tag", "" + scteststr);
+        MyParser ParkParser = new MyParser(false, scteststr);
+        parkInfoArr = ParkParser.getParkInfoArr();
+
+        int MyParkCntAll = parkInfoArr.size();
+        int MyParkCntLeft = 6;
+        for (int i = 0; i < parkInfoArr.size(); i++) {
+            if (parkInfoArr.get(i).getParkTF().equals("Y")) {
+                MyParkCntLeft--;
+            } else if (parkInfoArr.get(i).getCarID().equals("None")) {
+                continue;
+            } else if (parkInfoArr.get(i).getCarID().equals(memberID)) {
+                continue;
+            } else {
+                MyParkCntLeft--;
+            }
+        }
+
+        total_ParkListInfo.get(0).setParkCntAll(MyParkCntAll);
+        total_ParkListInfo.get(0).setParkCntLeft(MyParkCntLeft);
     }
 
     public void onClick_ReserveBtn(View view) {
