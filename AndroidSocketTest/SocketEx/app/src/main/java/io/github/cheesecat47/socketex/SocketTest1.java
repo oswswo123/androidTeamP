@@ -99,8 +99,6 @@ public class SocketTest1 extends Activity {
 //                sockReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 //                fromServer = sockReader.readLine();
 
-                InputStreamReader is = new InputStreamReader(socket.getInputStream());
-                fromServer = is;
 
 //                while ((fromServer = sockReader.readLine())!=null){
 //                    Log.d("Tag", "while "+fromServer);
