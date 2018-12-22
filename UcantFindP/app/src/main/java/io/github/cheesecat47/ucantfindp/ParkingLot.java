@@ -3,6 +3,7 @@ package io.github.cheesecat47.ucantfindp;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -18,6 +19,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 import static io.github.cheesecat47.ucantfindp.R.color.colorOurPurple;
 
 /*
@@ -31,11 +34,14 @@ public class ParkingLot extends Activity implements Button.OnClickListener {
     TextView TopText;
 //    String memberID;
     Button button;
+    ArrayList<ParkInfo> parkInfoArr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_parking_lot);
+
+
 
 
         // 상단부분 주차가능 주차불가 부분
@@ -53,50 +59,41 @@ public class ParkingLot extends Activity implements Button.OnClickListener {
 
 
         //소켓 테스트
-        SocketTest1 socketTest1 = new SocketTest1(45454);
+        SocketTest1 socketTest1 = new SocketTest1(50000);
         String scteststr = socketTest1.sendToServer("parkinglot", "select * from parkings;");
         Log.d("Tag",""+scteststr);
-
+        MyParser ParkParser = new MyParser(false, scteststr);
+        parkInfoArr = ParkParser.getParkInfoArr();
 //        MainActivity로부터 memberID값 받아오기
 //        Intent logIntent = getIntent();
 //        mamberID = logIntent.getExtras().getString("memberID");
 
-//        주차장 정보 불러오는 쿼리 날리기
-//        ParkInfo[] parkinfo = sendToServer("parkings", "SELECT * FROM parkings");
-
-
-        /*
-            DB에서 주차 상태를 받아서 주차공간상의 상태를 바꿔주는 부분입니다.
-            DB를 구현하고 나면 되는지 시험해야 할 부분이에요
-
 
             for(int i=0; i<6; i++){
-                int DbBtnId = getResources().getIdentifier("button" + i+1, "id", getPackageName());
+                int j = i + 1;
+                int DbBtnId = getResources().getIdentifier("button" + j, "id", getPackageName());
                 button = (Button)findViewById(DbBtnId);
+                String temp = parkInfoArr.get(i).getParkTF();
+                String temp2 = parkInfoArr.get(i).getCarID();
 
-                if(parkinfo[i].parkTR == "N") { //주차 공간이 비어있는 경우
-                    if(parkinfo[i].carID == null) { // 주차 공간에 등록된 아이디가 없을 경우
+                if(parkInfoArr.get(i).getParkTF().equals("N")) { //주차 공간이 비어있는 경우
+                    if(parkInfoArr.get(i).getCarID().equals("None")) { // 주차 공간에 등록된 아이디가 없을 경우
                         button.setBackgroundResource(R.drawable.drawable_parkinglot_withseat);
                     }
                     else{ // 주차 공간에 등록된 아이디가 있을 경우(예약자가 있는 경우)
                         button.setBackgroundResource(R.drawable.drawable_parkinglot_noseat);
-                        혹은
-                        button.setBackgroundDrawable(ContextCompat.getDrawable(Context, R.drawable.Drawable파일));
                     }
-
                 }
-                else if(parkinfo[i].parkTR == "Y") { //주차 공간이 차있는 경우
-                    if(parkinfo[i].carID == memberID) { // 주차 공간에 등록된 아이디가 membeID와 일치하는 경우
-                        button.setBackgroundResource(R.drawable.drawable_parkinglot_myseat);
-                    }
-                    else{
+                else if(parkInfoArr.get(i).getParkTF().equals("Y")) { //주차 공간이 차있는 경우
+//                    if (parkInfoArr.get(i).getCarID().equals(memberID)) { // 주차 공간에 등록된 아이디가 membeID와 일치하는 경우
+//                        button.setBackgroundResource(R.drawable.drawable_parkinglot_myseat);
+//                    } else {
                         button.setBackgroundResource(R.drawable.drawable_parkinglot_noseat);
-                        혹은
-                        button.setBackgroundDrawable(ContextCompat.getDrawable(Context, R.drawable.Drawable파일));
-                    }
+//                    }
                 }
             }
-         */
+
+
     }
 
     @Override
